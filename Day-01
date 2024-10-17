@@ -1,0 +1,61 @@
+root@ip-172-31-33-199:~# echo $(date)
+Thu Oct 17 05:12:58 UTC 2024
+root@ip-172-31-33-199:~# for i in {1..10}
+> do
+> echo $(date)
+> sleep 1
+> done
+Thu Oct 17 05:14:19 UTC 2024
+Thu Oct 17 05:14:20 UTC 2024
+Thu Oct 17 05:14:21 UTC 2024
+Thu Oct 17 05:14:22 UTC 2024
+Thu Oct 17 05:14:23 UTC 2024
+Thu Oct 17 05:14:24 UTC 2024
+Thu Oct 17 05:14:25 UTC 2024
+Thu Oct 17 05:14:26 UTC 2024
+Thu Oct 17 05:14:27 UTC 2024
+Thu Oct 17 05:14:28 UTC 2024
+
+for i in {1..10}; do echo $(date) | awk -F " " '{print $1,$2,$3}'; sleep 1; done
+Thu Oct 17
+Thu Oct 17
+Thu Oct 17
+
+root@ip-172-31-33-199:~# x=10
+root@ip-172-31-33-199:~# SG='veerendranath-devops-$x'
+root@ip-172-31-33-199:~# echo $SG
+veerendranath-devops-$x
+root@ip-172-31-33-199:~# SG="veerendranath-devops-$x"
+root@ip-172-31-33-199:~# echo $SG
+veerendranath-devops-10
+
+AWS Cli installtion:
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+
+root@ip-172-31-33-199:~# aws s3 ls
+2024-10-17 05:36:28 mybucketveeru
+root@ip-172-31-33-199:~# aws s3 ls | cut -d " " -f 3
+mybucketveeru
+
+root@ip-172-31-33-199:~# aws s3 ls | awk -F " " '{print $3,$2,$1}'
+mybucketveeru 05:36:28 2024-10-17
+
+
+grep - granular regular expression
+
+simple script :
+-----------------
+root@ip-172-31-33-199:~# ./script.abc 
+mybucketveeru
+hello veerendranath welcome to devsecops
+root@ip-172-31-33-199:~# vi script.abc 
+root@ip-172-31-33-199:~# ./script.abc 
++ aws s3 ls
++ cut -d ' ' -f 3
++ grep -i mybucketveeru
+mybucketveeru
++ echo 'hello veerendranath welcome to devsecops'
+hello veerendranath welcome to devsecops
