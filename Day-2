@@ -1,1 +1,20 @@
+aws ec2 describe-vpcs --region us-east-1
 
+aws ec2 describe-vpcs --region us-east-1 | jq
+
+aws ec2 describe-vpcs --region us-east-1 | jq ".Vpcs[]"
+
+root@ip-172-31-43-221:~# aws ec2 describe-vpcs --region us-east-1 | jq ".Vpcs[].VpcId"
+"vpc-02d07dce0ad582210"
+"vpc-001c0d097072d45f0"
+
+root@ip-172-31-43-221:~# aws ec2 describe-vpcs --region us-east-1 | jq ".Vpcs[].VpcId" | tr -d '""'
+vpc-02d07dce0ad582210
+vpc-001c0d097072d45f0
+root@ip-172-31-43-221:~# aws ec2 describe-vpcs --region us-east-1 | jq ".Vpcs[].VpcId" -r
+vpc-02d07dce0ad582210
+vpc-001c0d097072d45f0
+
+root@ip-172-31-43-221:~# aws ec2 describe-vpcs --region us-east-1 | jq ".Vpcs[].VpcId" -r | tr '[:lower:]' '[:upper:]'
+VPC-02D07DCE0AD582210
+VPC-001C0D097072D45F0
