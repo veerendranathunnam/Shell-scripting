@@ -19,5 +19,27 @@ root@ip-172-31-43-221:~# aws ec2 describe-vpcs --region us-east-1 | jq ".Vpcs[].
 VPC-02D07DCE0AD582210
 VPC-001C0D097072D45F0
 
+$#
+#!/bin/bash
+if [ $# -gt 0]; then
+    aws --version
+    if [ $? -eq 0 ]; then
+        REGIONS=$@
+        for REGION in ${REGIONS}; do
+            aws ec2 describe-vpcs --region ${REGION} | jq ".Vpcs[].VpcId" -r | tr -d '""'
+        done
+    else
+        echo "incorrect password"
+    fi
+else
+    echo "please give the arugument"
+fi
+-----------------------------------------
 status codes :
 $? - exit status of last executed command 
+$# - No of postional parameters passed in the script
+$@ - All postional parameters as separate words
+$$ - process ID of current shell
+$0 - name of the script it self
+$* - All postional parameters as single word
+$! - pid of the last job run in the background
