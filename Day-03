@@ -1,2 +1,23 @@
 Out redirection in bash
 
+below script will print even and odd number
+
+root@ip-172-31-82-180:~# cat script.sh 
+#!/bin/bash
+for I in {1..100}; do
+        if [ $((I % 2)) -eq 0 ]; then
+        echo "$I is a even number"
+    else
+        echo "$I is odd number"
+    fi
+done
+
+----------------------------------------------------------------
+every 1sec it will check the status of website
+while true; do curl https://google.com | grep -i google; sleep 1; done
+------------------------------------------
+it will print error in terminal
+bash script2.sh > /tmp/error
+
+by using below command ,output will store in /tmp/error it will not display anything on terminal
+bash script2.sh > /tmp/error1 2>&1
