@@ -1,0 +1,42 @@
+1.Automate Log File Cleanup 📂
+
+Prevent disk space issues by deleting old logs automatically.
+
+#!/bin/bash
+echo "Deleting log files older than 7 days..."
+find /var/log -type f -name "*.log" -mtime +7 -exec rm -f {} \;
+
+2. Check SSL Certificate Expiry 🔒
+
+Avoid downtime by monitoring SSL certificate expiration.
+
+#!/bin/bash
+DOMAIN="yourdomain.com"
+echo | openssl s_client -servername $DOMAIN -connect $DOMAIN:443 2>/dev/null | openssl x509 -noout -enddate
+
+3. Automate System Package Updates 💡
+
+Keep your Linux system updated without manual intervention.
+
+#!/bin/bash
+echo "Updating system packages..."
+sudo apt update && sudo apt upgrade -y
+
+4. Send Alerts for High CPU Usage ⚡
+
+Get notified when CPU usage crosses a threshold.
+
+#!/bin/bash
+THRESHOLD=80
+USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')
+if (( $(echo "$USAGE > $THRESHOLD" | bc -l) )); then
+ echo "High CPU Usage: $USAGE%" | mail -s "CPU Alert" you@example.com
+fi
+
+5. Restart a Failing Kubernetes Pod ☸️
+
+Automatically restart pods stuck in CrashLoopBackOff.
+
+#!/bin/bash
+echo "Restarting failed pods..."
+kubectl get pods --all-namespaces | grep CrashLoopBackOff | awk '{print $2}' | xargs kubectl delete pod
