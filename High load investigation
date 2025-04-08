@@ -1,0 +1,16 @@
+A linux server is experiencing high CPU Usage.How do you diagnose it?
+
+check load averge  5 10  15 min 
+
+uptime 
+
+identify processess consuming cpu
+
+top -o %CPU
+
+View detailed process usage : ps -eo pid,user,%cpu,cmd --sort=-%cpu| head
+
+check system resource usage  vmstat 1 5 
+                             iostat -c 1 5
+
+review logs journalctl -xe and dmesg | tail -50
