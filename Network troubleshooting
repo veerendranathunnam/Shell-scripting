@@ -1,0 +1,21 @@
+A server cannot reach google.com ,but ping 8.8.8.8 works.what is the issue?
+
+Ans : since dirct ip works,but domain name doesn't,it is likly dns issue 
+
+cat /etc/resolv.conf
+
+if no valid nameserver is set,add google's DNS
+server 8.8.8.8" >> /etc/resolv.conf
+
+systemctl restart networking 
+
+write a script that monitors CPU Usage and sends an alert if it execueted 80%
+
+#!/bin/bash
+THRESHOLD=80
+CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}'|cut -d. -f1)      / -b batch mode(useful for script.doesnot require user interaction)  -n1 run one iteration 
+if["CPU_USAGE" -gt "$THRESHOLD" ];then
+
+echo "warning high cpu usage deteted: $CPU_USAGE%" | mail -s "CPU Alert" admin@example.com
+
+fi
